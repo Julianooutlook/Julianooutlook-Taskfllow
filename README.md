@@ -27,3 +27,10 @@ TaskFlow é uma aplicação web para gerenciamento de tarefas estilo Kanban, com
 ```bash
 git clone https://github.com/Julianooutlook/TaskFlow.git
 cd TaskFlow
+
+### 1. Crie o arquivo .env copie os dados do .env.example coloque suas credenciais
+backend/config/.env.example backend/config/.env
+
+
+
+
