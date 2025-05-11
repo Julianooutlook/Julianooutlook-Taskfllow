@@ -25,5 +25,5 @@ TaskFlow é uma aplicação web para gerenciamento de tarefas estilo Kanban, com
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/Julianooutlook/Taskfllow.git
-cd Taskfllow
+git clone https://github.com/Julianooutlook/TaskFlow.git
+cd TaskFlow
