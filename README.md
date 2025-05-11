@@ -28,21 +28,16 @@ TaskFlow é uma aplicação web para gerenciamento de tarefas estilo Kanban, com
 git clone https://github.com/Julianooutlook/TaskFlow.git
 cd TaskFlow
 ````
-Agora, crie o arquivo .env na pasta backend/config, copiando os dados do .env.example coloque as variáveis de ambiente, exemplo:
+### Agora, crie o arquivo .env na pasta backend/config, copiando os dados do .env.example coloque as variáveis de ambiente, exemplo:
 
 POSTGRES_USER=usuario
-
 POSTGRES_PASSWORD=senha123
-
 POSTGRES_DB=meubanco
-
 POSTGRES_HOST=db
-
 POSTGRES_PORT=5432
-
 PORT=4000
-
 JWT_SECRET_KEY=ChaveSecreta
+
 
 
 
