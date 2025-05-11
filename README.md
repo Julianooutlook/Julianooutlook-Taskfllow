@@ -40,7 +40,7 @@ PORT=4000
 JWT_SECRET_KEY=ChaveSecreta
 ```
 
-# EM CONSTRUÇÂO
+# EM CONSTRUÇÃO
 
 
 
