@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    container_name: meu-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./backend/dados:/var/lib/postgresql/data
+    networks:
+      - taskflow-network
+
+  api:
+    build:
+      context: ./backend
+    container_name: taskflow-api
+    depends_on:
+      - db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      PORT: 4000
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./backend:/app
+    working_dir: /app
+    command: node server/app.js
+    networks:
+      - taskflow-network
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: taskflow-frontend
+    depends_on:
+      - api
+    ports:
+      - "3000:80"
+    networks:
+      - taskflow-network
+
+networks:
+  taskflow-network:
+    driver: bridge

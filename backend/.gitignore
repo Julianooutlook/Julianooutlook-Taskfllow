@@ -1,0 +1,19 @@
+# Dependências do Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Docker (se aplicável)
+docker-compose.override.yml
+
+# Ambiente (evita expor credenciais)
+.env
+.env.local
+.env.development
+.env.production
+.env.test
