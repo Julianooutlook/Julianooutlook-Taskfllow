@@ -40,10 +40,23 @@ PORT=4000
 JWT_SECRET_KEY=ChaveSecreta
 ```
 
-# EM CONSTRUÇÃO
+# Iniciar containers Docker
+### Certifique-se de que o Docker está rodando, então, na raiz do projeto execute:
+```bash
+docker compose up --build -d
+```
+ Esse comando irá construir e subir os containers necessários para o backend, banco de dados e frontend.
+
+---
+
+### Se tudo ocorreu corretamente você deve ver a Home ao acessar http://localhost:3000.
+
+## No fim da página tem um botão para se registrar no TaskFlow.
+
+![Demonstração do TaskFlow](https://imgur.com/a/xczHs53)
 
 
-
+### http://localhost:3000/register
 
 
 
