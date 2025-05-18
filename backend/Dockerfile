@@ -1,7 +1,6 @@
 
 FROM node:20
 
-# Use o mesmo caminho do volume do docker-compose
 WORKDIR /app
 
 
