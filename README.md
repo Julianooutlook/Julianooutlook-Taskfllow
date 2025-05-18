@@ -42,7 +42,8 @@ JWT_SECRET_KEY=ChaveSecreta
 
 # Iniciar containers Docker
 ### Certifique-se de que o Docker está rodando, então, na raiz do projeto execute:
-```bash
+bash
+```
 docker compose up --build -d
 ```
  Esse comando irá construir e subir os containers necessários para o backend, banco de dados e frontend.
