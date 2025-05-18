@@ -54,7 +54,6 @@ const Dashboard = () => {
   const location = useLocation();
   const userName = location.state?.userName || localStorage.getItem('user');
 
-
   useEffect(() => {
 
     fetchTasks();

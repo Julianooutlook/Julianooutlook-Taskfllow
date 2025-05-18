@@ -12,7 +12,7 @@ export function useActivityFeed() {
                 wsRef.current = ws;
 
                 ws.onopen = () => {
-                    if (process.env.NODE_ENV === 'devlopment') {
+                    if (process.env.NODE_ENV !== 'production') {
                         console.log('✅ WebSocket conectado');
                     }
                 };
@@ -21,8 +21,7 @@ export function useActivityFeed() {
                     try {
                         const data = JSON.parse(event.data);
 
-                        if (process.env.NODE_ENV === 'development') {
-                            console.warn('Mensagem WebSocket ignorada:', data);
+                        if (data.type === 'activity') {
                             setActivities((prev) => [data.payload, ...prev.slice(0, 4)]);
                         }
 
@@ -30,8 +29,9 @@ export function useActivityFeed() {
                         console.error('Erro ao parsear mensagem:', error);
                     }
                 };
+
                 ws.onerror = (error) => {
-                    console.error('Erro WebSock:', error);
+                    console.error('Erro WebSocket:', error);
                 };
 
                 ws.onclose = () => {
@@ -40,13 +40,18 @@ export function useActivityFeed() {
                 };
             }, 500);
         }
+
         connect();
 
         return () => {
             if (retryTimeoutRef.current) {
                 clearTimeout(retryTimeoutRef.current);
             }
+            if (wsRef.current) {
+                wsRef.current.close();
+            }
         };
     }, []);
+
     return activities;
 }

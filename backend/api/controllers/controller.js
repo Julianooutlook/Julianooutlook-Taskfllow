@@ -123,19 +123,25 @@ export async function createTasking(req, res) {
   }
   const userId = req.user.id;
 
+  const prioridadeValida = ['baixa', 'média', 'alta'];
+
+  if (!prioridadeValida.includes(priority?.toLowerCase())) {
+    return res.status(400).json({ error: "Prioridade inválida" });
+  }
+
   try {
     const result = await pool.query('SELECT name FROM "users" WHERE id = $1', [
       userId,
     ]);
-    const userName = result.rows[0]?.name || "Usuario desconhecido";
+    const userName = result.rows[0]?.name || "Usuário desconhecido";
 
     const query = `
-        INSERT INTO tasks (title, description, priority, user_id, flow_id)
-        VALUES ($1, $2, $3, $4, $5)
-        RETURNING *;
-        `;
+      INSERT INTO tasks (title, description, priority, user_id, flow_id)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING *;
+    `;
 
-    const values = [title, description, priority, userId, flow_id];
+    const values = [title, description, priority.toLowerCase(), userId, flow_id];
 
     const { rows } = await pool.query(query, values);
 
@@ -145,14 +151,13 @@ export async function createTasking(req, res) {
       timestamp: new Date().toISOString(),
     });
 
-    res
-      .status(201)
-      .json({ message: "Tarefa criada com seucesso", tarefas: rows[0] });
+    res.status(201).json({ message: "Tarefa criada com sucesso", tarefas: rows[0] });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Erro ao criar tarefa" });
   }
 }
+
 
 export async function getFlows(req, res) {
   try {
@@ -184,7 +189,7 @@ export async function moveTask(req, res) {
   
       const currentTask = verifyResult.rows[0];
       const oldFlowId = currentTask.flow_id;
-      const taskTitle = currentTask.title; // você esqueceu de pegar isso antes
+      const taskTitle = currentTask.title;
   
       const userQuery = "SELECT name FROM users WHERE id = $1;";
       const userResult = await pool.query(userQuery, [userId]);

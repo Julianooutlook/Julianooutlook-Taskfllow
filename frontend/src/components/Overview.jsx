@@ -9,13 +9,13 @@ const LoginButton = styled(Link)`
   display: inline-block;
   margin-top: 2rem;
   padding: 0.75rem 1.5rem;
-  background-color: #0056b3;
+  background-color: rgba(6, 177, 230, 0.815);
   color: #fff;
   text-align: center;
   border-radius: 8px;
   text-decoration: none;
   font-weight: bold;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.1s ease;
 
   &:hover {
     background-color: #00ffff;
@@ -27,7 +27,8 @@ const Container = styled.div`
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  background-color: #1613d628;
+  background-color: #171717;
+  box-shadow: 0 2px 10px rgba(6, 177, 230, 0.815);
   `
 ;
 
@@ -37,24 +38,33 @@ const Section = styled.section`
   gap: 1.5rem;
   align-items: center;
   margin-bottom: 2rem;
+  margin-top: 12px;
 `;
 
 const Title = styled.h2`
   font-size: 2rem;
   margin-bottom: 1rem;
+  color: #00FFFF;
 `;
 
 const Subtitle = styled.h3`
   font-size: 1.25rem;
   margin-top: 1rem;
+  color: rgba(6, 177, 230, 0.815);
 `;
 
 const Paragraph = styled.p`
   font-size: 1rem;
   line-height: 1.6;
-  color: #1c1c1c;
+  color: #008B8B;
   font-weight: bolder;
 `;
+
+const Ul = styled.ul`
+  list-style: none;
+  color: #008B8B;
+
+`
 
 export default function Overview() {
   return (
@@ -241,13 +251,13 @@ export default function Overview() {
         </Paragraph>
 
         <Subtitle>Por que usar o TaskFlow?</Subtitle>
-        <ul>
+        <Ul>
           <li>✅ Interface simples e responsiva</li>
           <li>✅ Organização estilo Kanban</li>
           <li>✅ Subtarefas e timelines em progresso</li>
           <li>✅ Backend robusto com PostgreSQL</li>
-          <li>✅ WebSocket para tempo real</li>
-        </ul>
+          <li>✅ WebSockets para visualização em tempo real</li>
+        </Ul>
 
         <LoginButton to="/login">Acessar TaskFlow</LoginButton>
       </Container>

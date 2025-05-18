@@ -11,7 +11,9 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./backend/dados:/var/lib/postgresql/data
+      # - ./backend/dados:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - taskflow-network
 
@@ -32,8 +34,9 @@ services:
       - "4000:4000"
     volumes:
       - ./backend:/app
+      - /app/node_modules
     working_dir: /app
-    command: node server/app.js
+    command: sh -c "./wait-for-it.sh db:5432 -- node server/app.js" 
     networks:
       - taskflow-network
 
@@ -51,3 +54,6 @@ services:
 networks:
   taskflow-network:
     driver: bridge
+
+volumes:
+  postgres_data:

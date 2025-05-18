@@ -45,8 +45,6 @@ const Timeline = () => {
 
       const updatedChecked = !subtask.checked;
 
-      console.log("false, true:", updatedChecked);
-
       const response = await api.patch(`/subtasks/${id}`, {
         checked: updatedChecked,
       });

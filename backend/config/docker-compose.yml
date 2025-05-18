@@ -29,8 +29,6 @@ services:
       PORT: 4000
     ports:
       - "4000:4000"
-    volumes:
-      - ../:/app  # Monta o código do back-end no container
     working_dir: /app
     command: sh -c "./wait-for-it.sh db:5432 -- node server/app.js"
     networks:

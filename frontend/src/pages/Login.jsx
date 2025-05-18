@@ -23,7 +23,8 @@ const Login = () => {
             const userData = response.data;
     
             localStorage.setItem('token', userData.token);
-            localStorage.setItem('user', userData.user.name);
+            localStorage.setItem('usuario', JSON.stringify(userData.user));
+            // localStorage.setItem('user', userData.user.name);
     
             navigate('/dashboard', { state: { userName: userData.user.name } });
     

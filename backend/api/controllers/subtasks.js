@@ -17,7 +17,7 @@ router.patch('/:id', async (req, res) => {
     }
 });
 
-router.put("/:id", async (req,res) => {
+router.put("/:id", async (req, res) => {
     try {
         const { id } = req.params;
         const { description } = req.body;
@@ -25,9 +25,9 @@ router.put("/:id", async (req,res) => {
         if (!description) {
             return res.status(400).json({ mensagem: "Descrição é obrigatória" });
         }
-        
+
         const subTarefaResult = await pool.query("SELECT * FROM subtasks WHERE id = $1", [id]);
-        
+
         if (subTarefaResult.rows.length === 0) {
             return res.status(404).json({ mensagem: "Tarefa não encontrada!" });
         }
@@ -41,15 +41,13 @@ router.put("/:id", async (req,res) => {
 
         const updateSubtasks = updateResult.rows[0];
 
-
-
         res.status(200).json({
             mensagem: "Subtarefa atualizada com sucesso!",
             tarefa: updateSubtasks,
         });
-        
+
     } catch (error) {
-        console.error('Erro ao aualizar subtarefa:', error);
+        console.error('Erro ao atualizar subtarefa:', error);
         res.status(500).send('Erro ao atualizar tarefa');
     }
 });
@@ -60,16 +58,18 @@ router.get("/:taskId", async (req, res) => {
 
         const query = `
         SELECT subtasks.*, tasks.title AS tasks_title
-        FROM subtasks JOIN tasks ON subtasks.tasks_id = tasks.id WHERE subtasks.tasks_id = $1;`;
+        FROM subtasks
+        JOIN tasks ON subtasks.task_id = tasks.id
+        WHERE subtasks.task_id = $1;
+        `;
 
         const { rows } = await pool.query(query, [taskId]);
-        res.json({ subtasks: rows, taskTitle: rows[0]?.tasks_title || null});
+        res.json({ subtasks: rows, taskTitle: rows[0]?.tasks_title || null });
 
     } catch (error) {
         console.error('Erro ao buscar subtarefas:', error);
         res.status(500).json({ error: 'Erro ao buscar subtarefas' });
     }
-
 });
 
 router.post("/", async (req, res) => {
@@ -81,7 +81,7 @@ router.post("/", async (req, res) => {
 
     try {
         await pool.query(
-            'INSERT INTO subtasks (tasks_id, description, checked) VALUES ($1, $2, $3)',
+            'INSERT INTO subtasks (task_id, description, checked) VALUES ($1, $2, $3)',
             [task_id, description, checked]
         );
         res.status(201).json({ message: "Subtarefa adicionada com sucesso!" });
@@ -90,7 +90,6 @@ router.post("/", async (req, res) => {
         res.status(500).json({ error: "Erro ao adicionar subtarefa" });
     }
 });
-
 
 router.delete("/:id", async (req, res) => {
     try {
