@@ -3,8 +3,6 @@ FROM node:18 AS build
 WORKDIR /app
 COPY . .
 
-COPY .env.production .env
-
 RUN npm install
 RUN npm run build  # Isso agora gera a pasta /app/dist
 
