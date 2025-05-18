@@ -49,13 +49,11 @@ docker compose up --build -d
 
 ---
 
-<<<<<<< HEAD
 ✅ Acesse a aplicação
-Se tudo ocorrer corretamente, acesse:
+Se tudo ocorrer corretamente:
 
 Home: http://localhost:3000
-=======
-📸 Demonstração
+
 ![Demonstração do TaskFlow](https://i.imgur.com/RbJNBRk.gif)
 
 ## Conclusão
