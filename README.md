@@ -49,6 +49,7 @@ docker compose up --build -d
 
 ---
 
+<<<<<<< HEAD
 ✅ Acesse a aplicação
 Se tudo ocorrer corretamente, acesse:
 
@@ -66,6 +67,22 @@ No fim da página principal, há um botão para criar sua conta.
 O TaskFlow foi criado para oferecer uma maneira prática e visual de organizar tarefas e projetos. Ele pode ser usado tanto por equipes quanto por indivíduos que desejam mais controle e fluidez no seu fluxo de trabalho.
 
 Sinta-se à vontade para contribuir, sugerir melhorias ou adaptar a ferramenta às suas necessidades!
+=======
+### Se tudo ocorreu corretamente você deve ver a Home ao acessar http://localhost:3000.
+
+## No fim da página tem um botão para se registrar no TaskFlow.
+
+![Demonstração do TaskFlow](https://i.imgur.com/RbJNBRk.gif)
+
+
+### http://localhost:3000/register
+
+
+
+
+
+
+>>>>>>> 40d8e3130d03fd1af566e55c1f1666210776bede
 
 
 
