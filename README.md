@@ -53,10 +53,12 @@ docker compose up --build -d
 
 ## No fim da página tem um botão para se registrar no TaskFlow.
 
-![Demonstração do TaskFlow](https://imgur.com/a/xczHs53)
+![Demonstração do TaskFlow](https://i.imgur.com/RbJNBRk.gif)
 
 
 ### http://localhost:3000/register
+
+
 
 
 
