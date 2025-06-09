@@ -117,22 +117,34 @@ export async function searchAllTasks(req, res) {
 
 export async function createTasking(req, res) {
   const { title, description, priority, flow_id } = req.body;
+  console.log("Prioridade recebida no backend:", priority);
 
   if (!req.user) {
     return res.status(401).json({ mensagem: "Usuário não autenticado" });
   }
+
   const userId = req.user.id;
 
-  const prioridadeValida = ['baixa', 'média', 'alta'];
+  const prioridadeMapeada = {
+    baixa: 'baixa',
+    media: 'média',
+    alta: 'alta'
+  };
 
-  if (!prioridadeValida.includes(priority?.toLowerCase())) {
+  const prioridadeNormalizada = priority
+    ?.trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, ""); 
+
+  const prioridadeFinal = prioridadeMapeada[prioridadeNormalizada];
+
+  if (!prioridadeFinal) {
     return res.status(400).json({ error: "Prioridade inválida" });
   }
 
   try {
-    const result = await pool.query('SELECT name FROM "users" WHERE id = $1', [
-      userId,
-    ]);
+    const result = await pool.query('SELECT name FROM "users" WHERE id = $1', [userId]);
     const userName = result.rows[0]?.name || "Usuário desconhecido";
 
     const query = `
@@ -141,7 +153,7 @@ export async function createTasking(req, res) {
       RETURNING *;
     `;
 
-    const values = [title, description, priority.toLowerCase(), userId, flow_id];
+    const values = [title, description, prioridadeFinal, userId, flow_id];
 
     const { rows } = await pool.query(query, values);
 
@@ -157,6 +169,8 @@ export async function createTasking(req, res) {
     res.status(500).json({ error: "Erro ao criar tarefa" });
   }
 }
+
+
 
 
 export async function getFlows(req, res) {

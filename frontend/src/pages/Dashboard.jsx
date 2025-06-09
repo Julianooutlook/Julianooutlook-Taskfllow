@@ -89,7 +89,7 @@ const Dashboard = () => {
       if (!usuario) {
         throw new Error("Usuario nao encontrado");
       }
-
+      
       await api.post("/createTasking", {
         user_id: usuario.id,
         title,
@@ -97,6 +97,7 @@ const Dashboard = () => {
         priority,
         flow_id: 1,
       });
+ 
       resetForm();
       fetchTasks();
     } catch (error) {
@@ -240,7 +241,7 @@ const Dashboard = () => {
             required
           >
             <option value="alta">Alta</option>
-            <option value="media">Média</option>
+            <option value="média">Média</option>
             <option value="baixa">Baixa</option>
           </StyledSelect>
         </StyledDivForm>
